@@ -10,6 +10,5 @@
 | the console gets access to each of the command object instances.
 |
 */
-Artisan::add(new mathiasgrimm\laraveldotenvgen\EnvGen());
 Artisan::add(new sendTextCommand);
 Artisan::add(new setupNexmoCommand);

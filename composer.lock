@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9e2bfb4086d338df726c69434e26b254",
+    "hash": "bf04fa640d19a9a0b7ce28585e723cc4",
     "packages": [
         {
             "name": "artdarek/pusherer",
@@ -208,16 +208,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "a85fab9a98f1f9b8ebcdbe71733f0d910e5b9adf"
+                "reference": "dcce91553e2e056857f1ea844949e9a8a71b613d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/a85fab9a98f1f9b8ebcdbe71733f0d910e5b9adf",
-                "reference": "a85fab9a98f1f9b8ebcdbe71733f0d910e5b9adf",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/dcce91553e2e056857f1ea844949e9a8a71b613d",
+                "reference": "dcce91553e2e056857f1ea844949e9a8a71b613d",
                 "shasum": ""
             },
             "require": {
@@ -262,7 +262,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2014-10-26 09:05:09"
+            "time": "2015-02-17 15:50:31"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -787,16 +787,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
-                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
+                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
                 "shasum": ""
             },
             "require": {
@@ -856,7 +856,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-03-05 01:12:12"
+            "time": "2015-03-09 09:58:04"
         },
         {
             "name": "natsu90/nexmo-php",
@@ -864,12 +864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/natsu90/nexmo-php.git",
-                "reference": "6d25ce23b5eab9a41352ea2efd3c1daa8a00c5cd"
+                "reference": "8bc07ad9e1d71148520f3bd8ebe8e7c6e93739eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natsu90/nexmo-php/zipball/6d25ce23b5eab9a41352ea2efd3c1daa8a00c5cd",
-                "reference": "6d25ce23b5eab9a41352ea2efd3c1daa8a00c5cd",
+                "url": "https://api.github.com/repos/natsu90/nexmo-php/zipball/8bc07ad9e1d71148520f3bd8ebe8e7c6e93739eb",
+                "reference": "8bc07ad9e1d71148520f3bd8ebe8e7c6e93739eb",
                 "shasum": ""
             },
             "require": {
@@ -898,20 +898,20 @@
                 }
             ],
             "description": "A Nexmo PHP library wrapper.",
-            "time": "2015-03-06 14:49:19"
+            "time": "2015-03-12 15:29:36"
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.16.0",
+            "version": "1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "9b7665041754eaa9bb2622349bc9adbc1cf61cb8"
+                "reference": "a1dd1ad9abfc8b3c4d8768068e6c71d293424e86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/9b7665041754eaa9bb2622349bc9adbc1cf61cb8",
-                "reference": "9b7665041754eaa9bb2622349bc9adbc1cf61cb8",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a1dd1ad9abfc8b3c4d8768068e6c71d293424e86",
+                "reference": "a1dd1ad9abfc8b3c4d8768068e6c71d293424e86",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +944,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2015-03-04 04:50:11"
+            "time": "2015-03-08 14:05:44"
         },
         {
             "name": "nikic/php-parser",
@@ -2257,48 +2257,6 @@
             "time": "2014-06-04 14:43:02"
         },
         {
-            "name": "mathiasgrimm/laravel-dot-env-gen",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mathiasgrimm/laravel-dot-env-gen.git",
-                "reference": "63465d64eacd51cf3029b846d78cfc86cb535f92"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mathiasgrimm/laravel-dot-env-gen/zipball/63465d64eacd51cf3029b846d78cfc86cb535f92",
-                "reference": "63465d64eacd51cf3029b846d78cfc86cb535f92",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "mathiasgrimm\\laraveldotenvgen\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Mathias Grimm",
-                    "email": "mathiasgrimm@gmail.com",
-                    "homepage": "http://phpEmpregos.com"
-                }
-            ],
-            "description": "laravel artisan command that generates a .env.gen file based on the existing project source code.",
-            "homepage": "https://github.com/mathiasgrimm/laravel-dot-env-gen/",
-            "keywords": [
-                "artisan",
-                "command",
-                "dotenv",
-                "env",
-                "environment"
-            ],
-            "time": "2015-03-04 22:49:11"
-        },
-        {
             "name": "vlucas/phpdotenv",
             "version": "v1.1.0",
             "source": {
@@ -2353,8 +2311,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "natsu90/nexmo-php": 20,
-        "mathiasgrimm/laravel-dot-env-gen": 20
+        "natsu90/nexmo-php": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

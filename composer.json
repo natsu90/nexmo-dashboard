@@ -12,8 +12,7 @@
 	},
 	"require-dev": {
 		"fzaninotto/faker": "*",
-		"vlucas/phpdotenv": "~1.1",
-		"mathiasgrimm/laravel-dot-env-gen": "dev-master"
+		"vlucas/phpdotenv": "~1.1"
 	},
 	"autoload": {
 		"classmap": [
