@@ -1,5 +1,7 @@
 <?php
 
+$mysql = parse_url(getenv("CLEARDB_DATABASE_URL") ?: 'mysql://root:@localhost/nexmo');
+
 return array(
 
 	/*
@@ -54,10 +56,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'forge',
-			'username'  => 'forge',
-			'password'  => '',
+			'host'      => $mysql["host"],
+			'database'  => substr($mysql["path"], 1),
+			'username'  => $mysql["user"],
+			'password'  => isset($mysql["pass"]) ?: '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

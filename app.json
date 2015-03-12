@@ -1,0 +1,7 @@
+{
+	"addons": [
+		"cleardb",
+		"pusher",
+		"iron_mq"
+	]
+}

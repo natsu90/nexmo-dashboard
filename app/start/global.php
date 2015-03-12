@@ -79,3 +79,6 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+if (is_file(base_path(). '/.env'))
+    Dotenv::load(base_path());

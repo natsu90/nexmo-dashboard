@@ -1,4 +1,5 @@
 <?php
+use Natsu90\Nexmo\NexmoAccount;
 
 class HomeController extends BaseController {
 
@@ -18,6 +19,82 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{
 		return View::make('hello');
+	}
+
+	public function postLogin()
+	{
+		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')), Input::get('remember_me')))
+			return Redirect::intended('/');
+		return Redirect::to('login')->with('message', 'Login failed!');
+	}
+
+	public function postRegister()
+	{
+		$validator = Validator::make(Input::all(), User::$rules);
+
+		if($validator->passes()) {
+			$user = new User;
+			$user->username = Input::get('username');
+			$user->password = Hash::make(Input::get('password'));
+			$user->save();
+
+			if(!Auth::check())
+				Auth::login($user);
+
+			return Redirect::to('/');
+		} else
+			return Redirect::to('register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+	}
+
+	public function postSetupNexmo()
+	{
+		$nexmo_key = Input::get('nexmo_key');
+		$nexmo_secret = Input::get('nexmo_secret');
+
+		$nexmo = new NexmoAccount($nexmo_key, $nexmo_secret);
+
+		try {
+			// check nexmo credentials
+			Cache::put('nexmo', $nexmo->getBalance(), 10);
+
+			// check db connection
+			DB::connection()->getDatabaseName();
+
+			// migrate db
+			Artisan::call('migrate');
+
+			// add numbers to db
+			$numbers = $nexmo->getInboundNumbers();
+			if($numbers['count'] > 0) {
+				foreach($numbers['numbers'] as $num)
+				{
+					$number = new Number;
+					$number->number = $num['msisdn'];
+					$number->country_code = $num['country'];
+					$number->type = $num['type'];
+					$number->features = $num['features'];
+					$number->voice_callback_type = $num['voiceCallbackType'];
+					$number->voice_callback_value = $num['voiceCallbackValue'];
+					$number->save();
+
+					// set mo and voice callback url
+					$nexmo->updateNumber($number->number, $number->country_code, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
+				}
+			}
+			// set dn callback url
+			$nexmo->updateAccountSettings(array('drCallBackUrl' => url('/callback/dn')));
+
+			// set nexmo credentials to env
+			putenv('NEXMO_KEY='. $nexmo_key);
+			putenv('NEXMO_SECRET='. $nexmo_secret);
+
+			if(Auth::check())
+				return Redirect::to('/');
+			return Redirect::to('/register');
+
+		} catch(Exception $e) {
+			return Redirect::to('start')->with('message', $e->__toString());
+		}
 	}
 
 }

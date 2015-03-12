@@ -5,8 +5,15 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"fabpot/goutte": "~2.0",
-		"vlucas/phpdotenv": "~1.1"
+		"natsu90/nexmo-php": "dev-master",
+		"dingo/api": "0.8.*",
+		"artdarek/pusherer": "1.0.*",
+		"iron-io/iron_mq": "~1"
+	},
+	"require-dev": {
+		"fzaninotto/faker": "*",
+		"vlucas/phpdotenv": "~1.1",
+		"mathiasgrimm/laravel-dot-env-gen": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

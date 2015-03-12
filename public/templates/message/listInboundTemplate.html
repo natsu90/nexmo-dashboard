@@ -1,0 +1,64 @@
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Inbound
+            <small>Messages</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-envelope"></i> Home</a></li>
+            <li><a href="#">Messages</a></li>
+            <li class="active">Inbound</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Inbound Messages</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="inbound" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Text</th>
+                        <th>Time</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(inbound.length > 0) { %>
+                      <% _.each(inbound, function(msg) { %>
+                      <tr>
+                        <td><%= msg.get('id') %></td>
+                        <td><%= msg.get('from') %></td>
+                        <td><%= msg.get('to') %></td>
+                        <td><%= msg.get('text') %></td>
+                        <td><%= msg.get('created_at') %></td>
+                        <td><a href="#/send/<%= msg.get('from') %>"><i class="fa fa-pencil"></i> Reply</a></td>
+                      </tr>
+                      <% }); %>
+                      <% } %>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Text</th>
+                        <th>Created Time</th>
+                        <th></th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
