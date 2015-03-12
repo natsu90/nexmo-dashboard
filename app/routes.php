@@ -12,6 +12,13 @@ use Natsu90\Nexmo\NexmoAccount;
 |
 */
 
+Route::get('/debug', function() {
+
+	putenv('FOO=BAR');
+
+	echo getenv('FOO');
+});
+
 Route::filter('nexmo', function() {
 
 	if(!getenv('NEXMO_KEY') || !getenv('NEXMO_SECRET'))
