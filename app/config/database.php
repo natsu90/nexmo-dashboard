@@ -59,7 +59,7 @@ return array(
 			'host'      => $mysql["host"],
 			'database'  => substr($mysql["path"], 1),
 			'username'  => $mysql["user"],
-			'password'  => isset($mysql["pass"]) ?: '',
+			'password'  => isset($mysql["pass"]) ? $mysql["pass"] : '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
