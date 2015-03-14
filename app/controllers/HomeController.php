@@ -78,7 +78,7 @@ class HomeController extends BaseController {
 					$number->save();
 
 					// set mo and voice callback url
-					$nexmo->updateNumber($number->number, $number->country_code, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
+					$nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
 				}
 			}
 			// set dn callback url
