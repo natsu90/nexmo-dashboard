@@ -17,6 +17,8 @@ Route::get('/debug', function() {
 	putenv('FOO=BAR');
 
 	echo getenv('FOO');
+	echo getenv('NEXMO_KEY');
+	echo getenv('NEXMO_SECRET');
 });
 
 Route::filter('nexmo', function() {
