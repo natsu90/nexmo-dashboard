@@ -55,7 +55,7 @@ class HomeController extends BaseController {
 
 		try {
 			// check nexmo credentials
-			Cache::put('nexmo', $nexmo->getBalance(), 10);
+			$credit_balance = $nexmo->getBalance();
 
 			// check db connection
 			DB::connection()->getDatabaseName();
@@ -83,6 +83,9 @@ class HomeController extends BaseController {
 			}
 			// set dn callback url
 			$nexmo->updateAccountSettings(array('drCallBackUrl' => url('/callback/dn')));
+
+			// set balance to cache
+			Cache::put('nexmo', $credit_balance, 10);
 
 			// set nexmo credentials to env
 			putenv('NEXMO_KEY='. $nexmo_key);
