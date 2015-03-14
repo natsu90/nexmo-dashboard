@@ -37,7 +37,7 @@ class sendMessage {
     {
     	$outbound = Outbound::findOrFail($outbound_id);
 
-    	$nexmo = new NexmoAccount(getenv('NEXMO_KEY'), getenv('NEXMO_SECRET'));
+    	$nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
 
     	$response = $nexmo->sendMessage($outbound->from, $outbound->to, $outbound->text, array('status-report-req' => 1, 'client-ref' => $outbound_id));
 

@@ -12,29 +12,15 @@ use Natsu90\Nexmo\NexmoAccount;
 |
 */
 
-Route::get('/debug', function() {
-
-	echo getenv('FOO');
-	echo getenv('NEXMO_KEY');
-	echo getenv('NEXMO_SECRET');
-});
-
-Route::get('/env', function() {
-
-	if(Input::get())
-		foreach(Input::get() as $k => $v)
-		{
-			apache_setenv($k, $v);
-		}
-});
-
 Route::filter('nexmo', function() {
 
-	if(!getenv('NEXMO_KEY') || !getenv('NEXMO_SECRET'))
+	$nexmo_key = Cache::get('NEXMO_KEY', getenv('NEXMO_KEY'));
+	$nexmo_secret = Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET'));
+	if(!$nexmo_key || !$nexmo_secret)
 		return Redirect::to('start');
 
 	// validate nexmo credentials
-	$nexmo = new NexmoAccount(getenv('NEXMO_KEY'), getenv('NEXMO_SECRET'));
+	$nexmo = new NexmoAccount($nexmo_secret, $nexmo_key);
 
 	try {
 
@@ -117,7 +103,10 @@ Route::post('/register', 'HomeController@postRegister');
 
 Route::filter('startFilter', function() {
 
-	if(Schema::hasTable('users') && (!getenv('NEXMO_KEY') || !getenv('NEXMO_SECRET'))) {
+	$nexmo_key = Cache::get('NEXMO_KEY', getenv('NEXMO_KEY'));
+	$nexmo_secret = Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET'));
+
+	if(Schema::hasTable('users') && (!$nexmo_key || !$nexmo_secret)) {
 		if(User::all()->count()) {
 			if(!Auth::check())
 				return Redirect::to('login');

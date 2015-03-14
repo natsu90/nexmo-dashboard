@@ -75,8 +75,8 @@ class setupNexmoCommand extends Command {
 			$nexmo->updateAccountSettings(array('drCallBackUrl' => url('/callback/dn')));
 
 			// set nexmo credentials to env
-			putenv('NEXMO_KEY='. $nexmo_key);
-			putenv('NEXMO_SECRET='. $nexmo_secret);
+			Cache::get('NEXMO_KEY', getenv('NEXMO_KEY'));
+			Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET'));
 
 			print_r($nexmo->getInboundNumbers());
 
