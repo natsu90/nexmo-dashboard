@@ -20,7 +20,7 @@ Route::filter('nexmo', function() {
 		return Redirect::to('start');
 
 	// validate nexmo credentials
-	$nexmo = new NexmoAccount($nexmo_secret, $nexmo_key);
+	$nexmo = new NexmoAccount($nexmo_key, $nexmo_secret);
 
 	try {
 

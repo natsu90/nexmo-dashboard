@@ -63,6 +63,9 @@ class HomeController extends BaseController {
 			// migrate db
 			Artisan::call('migrate');
 
+			// truncate number table
+			DB::table('number')->truncate();
+
 			// add numbers to db
 			$numbers = $nexmo->getInboundNumbers();
 			if($numbers['count'] > 0) {
