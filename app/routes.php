@@ -108,7 +108,7 @@ Route::post('/register', 'HomeController@postRegister');
 
 Route::filter('startFilter', function() {
 
-	if(Schema::hasTable('users')) {
+	if(Schema::hasTable('users') && (!getenv('NEXMO_KEY') || !getenv('NEXMO_SECRET'))) {
 		if(User::all()->count()) {
 			if(!Auth::check())
 				return Redirect::to('login');
