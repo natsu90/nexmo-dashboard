@@ -88,8 +88,8 @@ class HomeController extends BaseController {
 			Cache::put('nexmo', $credit_balance, 10);
 
 			// set nexmo credentials to env
-			putenv('NEXMO_KEY='. $nexmo_key);
-			putenv('NEXMO_SECRET='. $nexmo_secret);
+			apache_setenv('NEXMO_KEY', $nexmo_key);
+			apache_setenv('NEXMO_SECRET', $nexmo_secret);
 
 			if(Auth::check())
 				return Redirect::to('/');
