@@ -18,9 +18,9 @@ class CreateNumberTable extends Migration {
 			$table->bigInteger('number')->unsigned();
 			$table->string('country_code', 2);
 			$table->string('type', 30);
-			$table->string('features', 30);
+			$table->string('features', 100);
 			$table->string('voice_callback_type', 30);
-			$table->string('voice_callback_value', 100);
+			$table->string('voice_callback_value');
 			$table->timestamps();
 		});
 	}
