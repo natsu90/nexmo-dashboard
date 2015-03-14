@@ -14,8 +14,8 @@ use Natsu90\Nexmo\NexmoAccount;
 
 Route::filter('nexmo', function() {
 
-	$nexmo_key = getenv('NEXMO_KEY') ?: (Schema::has('cache') ? Cache::get('NEXMO_KEY') : false);
-	$nexmo_secret = getenv('NEXMO_SECRET') ?: (Schema::has('cache') ? Cache::get('NEXMO_SECRET') : false);
+	$nexmo_key = getenv('NEXMO_KEY') ?: (Schema::hasTable('cache') ? Cache::get('NEXMO_KEY') : false);
+	$nexmo_secret = getenv('NEXMO_SECRET') ?: (Schema::hasTable('cache') ? Cache::get('NEXMO_SECRET') : false);
 	if(!$nexmo_key || !$nexmo_secret)
 		return Redirect::to('start');
 
