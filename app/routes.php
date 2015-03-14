@@ -103,8 +103,8 @@ Route::post('/register', 'HomeController@postRegister');
 
 Route::filter('startFilter', function() {
 
-	$nexmo_key = Cache::get('NEXMO_KEY', getenv('NEXMO_KEY'));
-	$nexmo_secret = Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET'));
+	$nexmo_key = getenv('NEXMO_KEY') ?: (Schema::hasTable('cache') ? Cache::get('NEXMO_KEY') : false);
+	$nexmo_secret = getenv('NEXMO_SECRET') ?: (Schema::hasTable('cache') ? Cache::get('NEXMO_SECRET') : false);
 
 	if(Schema::hasTable('users') && (!$nexmo_key || !$nexmo_secret)) {
 		if(User::all()->count()) {
