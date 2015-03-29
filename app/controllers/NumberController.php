@@ -52,7 +52,8 @@ class NumberController extends \BaseController {
 		$number = Number::where('number', $id)->first();
 		$number->voice_callback_type = Input::get('voice_callback_type');
 		$number->voice_callback_value = Input::get('voice_callback_value');
-		return $number->save();
+
+		return array('status' => $number->save() ? 'OK' : 'Saved');
 	}
 
 

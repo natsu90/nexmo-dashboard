@@ -38,7 +38,9 @@ define([
         	this.collection = new NumberCollection();
         	this.collection.fetch({
                success: function(collection, response) {
-                   var currentNumber = collection.findWhere({number: number}),
+                   var currentNumber = collection.filter(function(o) { 
+                      return _.where(o, {number: parseInt(number)}).length > 0 || _.where(o, {number: number.toString()}).length > 0;
+                    })[0],
 
                    template = _.template(updateNumberTemplate, {
                        number: currentNumber

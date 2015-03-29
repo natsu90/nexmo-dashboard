@@ -35,5 +35,12 @@ class Number extends Eloquent {
             // set mo and voice callback url
 			$nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
         });
+
+        static::updated(function($number) {
+
+            $nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
+            // set mo and voice callback url
+            $nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value));
+        });
     }
 }
