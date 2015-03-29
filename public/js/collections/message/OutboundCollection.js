@@ -13,7 +13,7 @@ define(['jquery', 'underscore', 'backbone', 'models/message/OutboundModel', 'bac
                 $outbound_menu.append('<span class="label label-success pull-right notification">0</span>').fadeIn('slow');
                 $outbound_notification = $outbound_menu.find('.notification');
             }
-            $outbound_notification.text(parseInt($outbound_notification.text()) + 1);
+            $outbound_notification.text(parseInt($outbound_notification.text()) + 1).fadeOut().fadeIn();
             if(Backbone.history.fragment == 'outbound')
                 $outbound_notification.fadeOut('slow');
 

@@ -1,0 +1,59 @@
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Update
+            <small>Number</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-pencil"></i> Home</a></li>
+            <li><a href="#">Numbers</a></li>
+            <li class="active">Update Number</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- right column -->
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">Update Number: <%= number.get('number') %></h3>
+                </div><!-- /.box-header -->
+
+              <form role="form">
+                <div class="box-body">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Forward to</label>
+                      <div id="voice-callback-type" class="btn-group" data-toggle="buttons" style="width:100%">
+                        <label class="btn btn-primary">
+                          <input type="radio" name="voice_callback_type" value="sip"> SIP
+                        </label>
+                        <label class="btn btn-primary">
+                          <input type="radio" name="voice_callback_type" value="tel"> Phone
+                        </label>
+                        <label class="btn btn-primary">
+                          <input type="radio" name="voice_callback_type" value="vxml"> VoiceXML
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- textarea -->
+                    <div class="form-group">
+                      <label>Value</label>
+                      <input class="form-control" type="text" id="voice_callback_value" value="<%= number.get('voice_callback_value') %>" />
+                    </div>
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <input type="hidden" id="number" value="<%= number.get('number') %>" />
+                    <button data-action="update" type="submit" class="btn btn-primary" data-loading-text="Updating...">Update</button>         
+                    <button data-action="delete" type="submit" class="btn btn-danger pull-right" data-loading-text="Deleting...">Delete</button>
+                </div>
+              </form>
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->

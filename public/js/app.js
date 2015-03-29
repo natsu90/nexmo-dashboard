@@ -11,7 +11,8 @@ define([
   'datatables',
   'datatables_bootstrap',
   'backbone_live',
-  'pace'
+  'pace',
+  'select2'
 ], function($, _, Backbone, Router, Bootstrap){
   var initialize = function(){
     // Pass in our Router module and call it's initialize function

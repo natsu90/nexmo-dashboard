@@ -4,8 +4,9 @@ define([
   'backbone',
   'views/message/InboundView',
   'views/message/OutboundView',
-  'views/number/SendMessageView'
-], function($, _, Backbone, InboundView, OutboundView, SendMessageView) {
+  'views/message/SendMessageView',
+  'views/number/UpdateNumberView',
+], function($, _, Backbone, InboundView, OutboundView, SendMessageView, UpdateNumberView) {
  
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -13,6 +14,7 @@ define([
       'inbound': 'showInbound',
       'outbound': 'showOutbound',
       'send(/:number)': 'sendMessage',
+      'number/(:number)': 'updateNumber',
  
       // Default
       '*actions': 'showInbound'
@@ -41,13 +43,19 @@ define([
         sendMessageView.render(number);
     });
 
+    app_router.on('route:updateNumber', function (number) {
+ 
+        var updateNumberView = new UpdateNumberView();
+        updateNumberView.render(number);
+    });
+
     var pusher_key = 'e1679c9044c67acd354b',
         pusher_channel = 'boom',
         pusher = new Pusher(pusher_key);
     window.pusher_subscriber = pusher.subscribe(pusher_channel);
 
     pusher_subscriber.bind('update_balance', function(balance) {
-      $('#credit-balance').text(balance.replace(/0+$/g, '').substr(0,10));
+      $('#credit-balance').text(balance.replace(/0+$/g, '').substr(0,10)).fadeOut().fadeIn();
     });
 
     String.prototype.ucfirst = function() {

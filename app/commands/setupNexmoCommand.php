@@ -45,13 +45,16 @@ class setupNexmoCommand extends Command {
 
 		try {
 			// check nexmo credentials
-			Cache::put('nexmo', $nexmo->getBalance(), 10);
+			$credit_balance = $nexmo->getBalance();
 
 			// check db connection
 			DB::connection()->getDatabaseName();
 
 			// migrate db
 			Artisan::call('migrate');
+
+			// truncate number table
+			DB::table('number')->truncate();
 
 			// add numbers to db
 			$numbers = $nexmo->getInboundNumbers();
@@ -66,21 +69,23 @@ class setupNexmoCommand extends Command {
 					$number->voice_callback_type = $num['voiceCallbackType'];
 					$number->voice_callback_value = $num['voiceCallbackValue'];
 					$number->save();
-
-					// set mo and voice callback url
-					$nexmo->updateNumber($num['country'], $num['msisdn'], url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
 				}
 			}
 			// set dn callback url
 			$nexmo->updateAccountSettings(array('drCallBackUrl' => url('/callback/dn')));
 
+			// set balance to cache
+			Cache::put('nexmo', $credit_balance, 10);
+
 			// set nexmo credentials to env
-			Cache::get('NEXMO_KEY', getenv('NEXMO_KEY'));
-			Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET'));
+			Cache::forever('NEXMO_KEY', $nexmo_key);
+			Cache::forever('NEXMO_SECRET', $nexmo_secret);
 
 			print_r($nexmo->getInboundNumbers());
 
 		} catch(Exception $e) {
+
+			$this->error('Something went wrong! Error: '.$e->getMessage());
 			Log::error( $e->__toString());
 		}
 	}
@@ -93,8 +98,8 @@ class setupNexmoCommand extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('nexmo_key', InputArgument::REQUIRED, 'An example argument.'),
-			array('nexmo_secret', InputArgument::REQUIRED, 'An example argument.'),
+			array('nexmo_key', InputArgument::REQUIRED, 'Nexmo Key'),
+			array('nexmo_secret', InputArgument::REQUIRED, 'Nexmo Secret'),
 		);
 	}
 

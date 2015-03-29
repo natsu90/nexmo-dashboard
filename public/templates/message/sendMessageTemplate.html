@@ -27,15 +27,21 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>From</label>
-                      <select class="form-control" id="from">
-                        <option value="601117225067">601117225067</option>
+                      <select id="from" style="width:100%">
+                        <% if(numbers.length > 0) { %>
+                        <% _.each(numbers, function(number) { %>
+                        <% if(number.get('features').indexOf('SMS') >= 0) { %>
+                        <option value="<%= number.get('number') %>"><%= number.get('number') %></option>
+                        <% } %>
+                        <% }); %>
+                        <% } %>
                       </select>
                     </div>
 
                     <!-- textarea -->
                     <div class="form-group">
                       <label>To</label>
-                      <textarea id="to" class="form-control" rows="3" placeholder="Enter numbers with country number prefix (separated by comma, semicolon, slash or new line) ..."></textarea>
+                      <textarea id="to" class="form-control" rows="3" placeholder="Enter numbers with country number prefix (separated by comma, semicolon, slash, or new line) ..."></textarea>
                     </div>
 
                     <div class="form-group">

@@ -12,7 +12,8 @@ require.config({
         datatables_bootstrap: ['//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap'],
         pusher: ['//js.pusher.com/2.2/pusher.min'],
         backbone_live: 'libs/backbone-live',
-        pace: ['//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min']
+        pace: ['//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min'],
+        select2: 'libs/select2/select2.min'
     },
     shim: {
         'backbone': {
@@ -52,8 +53,12 @@ require.config({
         },
         'pace': {
             
+        },
+        'select2': {
+            deps: ['jquery']
         }
-    }
+    },
+    waitSeconds: 0
 });
 require(['app', ], function(App) {
     App.initialize();

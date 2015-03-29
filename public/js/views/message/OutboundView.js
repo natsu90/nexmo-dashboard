@@ -7,7 +7,7 @@ define(['jquery', 'underscore', 'backbone','collections/message/OutboundCollecti
         	this.collection.fetch({
                success: function(collection, response) {
                    var template = _.template(listOutboundTemplate, {
-                       outbound: that.collection.models
+                       outbound: collection.models
                    });
                    that.$el.html(template);
 

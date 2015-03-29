@@ -64,20 +64,39 @@ define([
         	this.collection.fetch({
                success: function(collection, response) {
                    var template = _.template(sendMessageTemplate, {
-                       number: that.collection.models
+                       numbers: collection.models
                    });
 
                    that.$el.html(template);
                    that.$('form').off('submit').on('submit', that.sendMessage);
-                   $('#to').val(number);
+                   if(number)
+                    $('#to').val(number+';');
+
+                  $('#from').select2({
+                      allowClear:true,
+                      formatNoMatches: function(term) {
+                        /* customize the no matches output */
+                        return "<a href='#' id='addNew' class='btn btn-default'>Add Sender ID</a>"
+                      }
+                    })
+                    .parent().find('.select2-with-searchbox').on('click','#addNew',function(){
+                      /* add the new term */
+                      var newTerm = $(this).closest('.select2-with-searchbox').find('.select2-input').val(),
+                          $from = $('#from');
+
+                      $('<option value="'+newTerm+'">'+newTerm+'</option>').appendTo($from);
+                      $from.select2('val', newTerm) // select the new term
+                        .select2('close');   // close the dropdown
+                    });
 
                   $('.sidebar-menu li').removeClass('active').has('a[href="#/send"]').addClass('active');
+
                },
                error: function(collection, response) {
                    console.log("error");
                }
            });
-          this.collection.live({pusherChannel: pusher_subscriber, eventType: "number"});
+        this.collection.live({pusherChannel: pusher_subscriber, eventType: "number"});
         }
     });
     return SendMessageView;

@@ -16,11 +16,6 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
-	}
-
 	public function postLogin()
 	{
 		if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')), Input::get('remember_me')))
@@ -79,9 +74,6 @@ class HomeController extends BaseController {
 					$number->voice_callback_type = $num['voiceCallbackType'];
 					$number->voice_callback_value = $num['voiceCallbackValue'];
 					$number->save();
-
-					// set mo and voice callback url
-					$nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
 				}
 			}
 			// set dn callback url

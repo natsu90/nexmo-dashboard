@@ -7,6 +7,20 @@ class Outbound extends Eloquent {
 
 	protected $fillable = array('from', 'to', 'text', 'status', 'type');
 
+    /*
+    protected $appends = array('status');
+
+    public function getStatusAttribute()
+    {
+        return $this->attributes['status'];
+    }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value;
+    }
+    */
+
 	public function outbound_chunks()
 	{
 		return $this->hasMany('OutboundChunk');

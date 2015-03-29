@@ -106,7 +106,7 @@ Route::filter('startFilter', function() {
 	$nexmo_key = getenv('NEXMO_KEY') ?: (Schema::hasTable('cache') ? Cache::get('NEXMO_KEY') : false);
 	$nexmo_secret = getenv('NEXMO_SECRET') ?: (Schema::hasTable('cache') ? Cache::get('NEXMO_SECRET') : false);
 
-	if(Schema::hasTable('users') && (!$nexmo_key || !$nexmo_secret)) {
+	if(Schema::hasTable('users') && $nexmo_key && $nexmo_secret) {
 		if(User::all()->count()) {
 			if(!Auth::check())
 				return Redirect::to('login');
@@ -175,3 +175,25 @@ Route::api('v1', function() {
     Route::resource('outbound', 'OutboundController', array('only' => array('index', 'show', 'store')));
     Route::resource('number', 'NumberController', array('only' => array('index', 'show', 'store', 'update', 'destroy')));
 });
+
+/* VoiceXML Sample */
+/*
+Route::get('voicexml.xml', function() {
+
+	$xml = <<<EOT
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<vxml version = "2.1">
+  		<form>
+    		<block>
+    			<prompt>
+      				Surprise madafaka!
+    			</prompt>
+    		</block>
+  		</form>
+	</vxml>
+EOT;
+
+	return Response::make($xml)->header('Content-Type', 'text/xml');
+});
+*/

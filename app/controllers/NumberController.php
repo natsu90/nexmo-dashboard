@@ -37,7 +37,7 @@ class NumberController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return Number::find($id);
+		return Number::where('number', $id)->first();
 	}
 
 
@@ -49,7 +49,10 @@ class NumberController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$number = Number::where('number', $id)->first();
+		$number->voice_callback_type = Input::get('voice_callback_type');
+		$number->voice_callback_value = Input::get('voice_callback_value');
+		return $number->save();
 	}
 
 

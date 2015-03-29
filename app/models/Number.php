@@ -1,4 +1,5 @@
 <?php
+use Natsu90\Nexmo\NexmoAccount;
 
 class Number extends Eloquent {
 	
@@ -23,17 +24,16 @@ class Number extends Eloquent {
     {
         $this->attributes['features'] = serialize($value);
     }
-/*
+
 	public static function boot()
     {
         parent::boot();
 
         static::created(function($number) {
 
-        	$nexmo = new NexmoAccount($nexmo_key, $nexmo_secret);
+        	$nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
             // set mo and voice callback url
-			$nexmo->updateNumber($num['country'], $num['msisdn'], url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
+			$nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
         });
     }
- */
 }
