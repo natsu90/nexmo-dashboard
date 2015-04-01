@@ -27,6 +27,8 @@ class NumberController extends \BaseController {
 
         if($isBought) {
 
+        	Pusherer::trigger('boom', 'update_balance', $nexmo->getBalance());
+
         	$number = new Number;
         	$number->number = Input::get('number');
         	$number->country_code = Input::get('country_code');
