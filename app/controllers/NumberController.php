@@ -66,7 +66,7 @@ class NumberController extends \BaseController {
 		$number->voice_callback_value = Input::get('voice_callback_value');
 
 		if($number->save())
-			return $this->response->noContent();
+			return array();
 		return $this->response->errorInternal();
 	}
 
@@ -82,7 +82,7 @@ class NumberController extends \BaseController {
 		$number = Number::where('number', $id)->first();
 		
 		if($number->delete())
-			return $this->response->noContent();
+			return array();
 		return $this->response->errorInternal();
 	}
 

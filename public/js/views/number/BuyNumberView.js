@@ -13,7 +13,7 @@ define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection'
           });
           $this.button('loading');
 
-          number.save({
+          number.save(null, {
             success: function() {
               window.location.hash = '/number/'+$this.data('number');
             },

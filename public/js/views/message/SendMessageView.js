@@ -39,7 +39,7 @@ define([
           console.log(outbound_data);
            
           outbound = new OutboundModel(outbound_data);
-          outbound.save({
+          outbound.save(null, {
             success: function() {
               window.location.hash = '/outbound';
             },

@@ -23,7 +23,7 @@ define([
 
           if($btn.data('action') == 'delete') {
 
-            number.destroy({
+            number.destroy(null, {
               success: function () {
                 window.location.hash = '/inbound';
               },

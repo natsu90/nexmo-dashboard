@@ -45,6 +45,12 @@ define([
         sendMessageView.render(number);
     });
 
+    app_router.on('route:updateNumber', function (number) {
+ 
+        var updateNumberView = new UpdateNumberView();
+        updateNumberView.render(number);
+    });
+
     app_router.on('route:buyNumber', function (country) {
  
         var buyNumberView = new BuyNumberView();
