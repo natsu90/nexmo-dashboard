@@ -66,7 +66,9 @@ define([
                    that.$el.html(template);
                    that.$('form').off('submit').on('submit', that.updateNumber);
 
-                   $('[name=voice_callback_type][value='+currentNumber.get('voice_callback_type')+']').click();
+                   var voice_callback_type = currentNumber.get('voice_callback_type');
+                   if(voice_callback_type != null || voice_callback_type != '')
+                    $('[name=voice_callback_type][value='+currentNumber.get('voice_callback_type')+']').click();
 
                   $('.sidebar-menu li').removeClass('active').has('a[href="#/number/'+number+'"]').addClass('active');
 
