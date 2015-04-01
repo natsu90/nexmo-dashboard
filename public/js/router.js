@@ -6,7 +6,8 @@ define([
   'views/message/OutboundView',
   'views/message/SendMessageView',
   'views/number/UpdateNumberView',
-], function($, _, Backbone, InboundView, OutboundView, SendMessageView, UpdateNumberView) {
+  'views/number/BuyNumberView',
+], function($, _, Backbone, InboundView, OutboundView, SendMessageView, UpdateNumberView, BuyNumberView) {
  
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -14,6 +15,7 @@ define([
       'inbound': 'showInbound',
       'outbound': 'showOutbound',
       'send(/:number)': 'sendMessage',
+      'buy(/:country)': 'buyNumber',
       'number/(:number)': 'updateNumber',
  
       // Default
@@ -43,10 +45,10 @@ define([
         sendMessageView.render(number);
     });
 
-    app_router.on('route:updateNumber', function (number) {
+    app_router.on('route:buyNumber', function (country) {
  
-        var updateNumberView = new UpdateNumberView();
-        updateNumberView.render(number);
+        var buyNumberView = new BuyNumberView();
+        buyNumberView.render(country);
     });
 
     var pusher_key = 'e1679c9044c67acd354b',

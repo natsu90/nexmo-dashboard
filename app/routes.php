@@ -173,6 +173,7 @@ Route::api('v1', function() {
 
     Route::resource('inbound', 'InboundController', array('only' => array('index', 'show')));
     Route::resource('outbound', 'OutboundController', array('only' => array('index', 'show', 'store')));
+    Route::get('number/search/{country_code}', 'NumberController@getSearch');
     Route::resource('number', 'NumberController', array('only' => array('index', 'show', 'store', 'update', 'destroy')));
 });
 

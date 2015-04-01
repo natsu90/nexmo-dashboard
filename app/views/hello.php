@@ -98,8 +98,8 @@
             </li>
             <li class="header">NUMBERS</li>
             <li>
-              <a href="#">
-                <i class="fa fa-plus-square text-info"></i> <span class="text-info">New Number</span>
+              <a href="#/buy">
+                <i class="fa fa-plus-square text-info"></i> <span class="text-info">Buy Number</span>
               </a>
             </li>
             <li>
@@ -117,8 +117,8 @@
               </ul>
             </li>
             <li>
-              <a href="#/logs">
-                <i class="fa fa-exchange"></i> <span>Call Logs</span> <span class="label label-warning pull-right">3</span>
+              <a href="#/calls">
+                <i class="fa fa-exchange"></i> <span>Call Logs</span>
               </a>
             </li>
             <li>

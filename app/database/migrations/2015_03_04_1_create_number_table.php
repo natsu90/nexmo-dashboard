@@ -19,8 +19,9 @@ class CreateNumberTable extends Migration {
 			$table->string('country_code', 2);
 			$table->string('type', 30);
 			$table->string('features', 100);
-			$table->string('voice_callback_type', 30);
+			$table->string('voice_callback_type', 10);
 			$table->string('voice_callback_value');
+			$table->string('own_callback_url');
 			$table->timestamps();
 		});
 	}

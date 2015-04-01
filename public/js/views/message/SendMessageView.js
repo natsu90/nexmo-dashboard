@@ -25,7 +25,7 @@ define([
           if(message == "")
             return;
 
-          $('#send-btn').button('loading');
+          $btn = $('#send-btn').button('loading');
           var regex_foo = new RegExp(unused_symbols.join('|'), 'g'),
               outbound_data = {
                 from: $('#from').val(),
@@ -39,24 +39,14 @@ define([
           console.log(outbound_data);
            
           outbound = new OutboundModel(outbound_data);
-          outbound.save();
-          /*
-          senders.forEach(function(sender) {
-            if(sender.trim() == "")
-              return;
-
-            var outbound_data = {
-              from: $('#from').val(),
-              to: sender,
-              text: message
-            };
-          
-            var outbound = new OutboundModel(outbound_data);
-            outbound.save();
-          
+          outbound.save({
+            success: function() {
+              window.location.hash = '/outbound';
+            },
+            error: function(e) {
+              $btn.button('reset');
+            }
           });
-          */
-          window.location.hash = '/outbound';
         }, 
         render: function(number) {
         	var that = this;
@@ -96,7 +86,6 @@ define([
                    console.log("error");
                }
            });
-        this.collection.live({pusherChannel: pusher_subscriber, eventType: "number"});
         }
     });
     return SendMessageView;

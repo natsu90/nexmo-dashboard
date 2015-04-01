@@ -10,10 +10,6 @@ class NumberController extends \BaseController {
 	 */
 	public function index()
 	{
-		/*
-		$nexmo = new NexmoAccount(getenv('NEXMO_KEY'), getenv('NEXMO_SECRET'));
-		return $nexmo->getInboundNumbers();
-		*/
 		return Number::all();
 	}
 
@@ -25,7 +21,23 @@ class NumberController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
+
+        $isBought = $nexmo->buyNumber(Input::get('country_code'), Input::get('number'));
+
+        if($isBought) {
+
+        	$number = new Number;
+        	$number->number = Input::get('number');
+        	$number->country_code = Input::get('country_code');
+        	$number->type = Input::get('type');
+        	$number->features = explode(',', Input::get('features'));
+        	$number->save();
+
+        	return $number;
+        }
+
+        return $this->response->errorInternal();
 	}
 
 
@@ -53,7 +65,9 @@ class NumberController extends \BaseController {
 		$number->voice_callback_type = Input::get('voice_callback_type');
 		$number->voice_callback_value = Input::get('voice_callback_value');
 
-		return array('status' => $number->save() ? 'OK' : 'Saved');
+		if($number->save())
+			return $this->response->noContent();
+		return $this->response->errorInternal();
 	}
 
 
@@ -65,8 +79,17 @@ class NumberController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$number = Number::where('number', $id)->first();
+		
+		if($number->delete())
+			return $this->response->noContent();
+		return $this->response->errorInternal();
 	}
 
+	public function getSearch($country_code)
+	{
+        $nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
 
+		return $nexmo->getAvailableInboundNumbers($country_code, array('size' => 100));
+	}
 }

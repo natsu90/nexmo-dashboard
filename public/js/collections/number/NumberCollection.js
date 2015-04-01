@@ -6,13 +6,24 @@ define(['jquery', 'underscore', 'backbone', 'models/number/NumberModel', 'backbo
             return data.numbers;
         },
         add: function(data) {
-            console.log('number added');
+            
+            $numbers_menu = $('.sidebar-menu > li > a[href="#"]:contains("Numbers")');
+            $numbers_notification = $numbers_menu.find('.notification');
+            $numbers_menu.find('.treeview-menu').append('<li><a href="#/number/"'+data.number+'><i class="fa fa-'+ (data.type.indexOf('mobile') >= 0 ? 'mobile' : 'phone') +'"></i> '+data.number+'</a></li>')
+                .find('a:contains('+data.number+')').addClass('active');
+            $numbers_notification.text(parseInt($numbers_notification.text()) + 1).fadeOut().fadeIn();
         },
         update: function(data) {
             console.log('number updated');
         },
         remove: function(data) {
             console.log('number removed');
+        },
+        fetch: function(options) {
+            if(typeof options.buy != 'undefined')
+                options.url = this.url+'/search/'+options.buy;
+
+            return Backbone.Collection.prototype.fetch.call(this, options);
         }
     });
     return NumberCollection;

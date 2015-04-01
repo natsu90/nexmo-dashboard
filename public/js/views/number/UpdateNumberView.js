@@ -23,14 +23,31 @@ define([
 
           if($btn.data('action') == 'delete') {
 
-            console.log(number, 'deleting');
+            number.destroy({
+              success: function () {
+                window.location.hash = '/inbound';
+              },
+              error: function() {
+                $btn.button('reset').fadeOut().fadeIn();
+                console.log('error');
+              }
+            });
 
           } else if($btn.data('action') == 'update') {
 
             number.save({
               voice_callback_type: $voice_callback_type.filter(':checked').val(),
               voice_callback_value: $voice_callback_value.val()
-            }, {patch: true});
+            }, {
+              patch: true, 
+              success: function () {
+                $btn.button('reset');
+              }, 
+              error: function () {
+                $btn.button('reset').fadeOut().fadeIn();
+                console.log('error');
+              }
+            });
           }
         }, 
         render: function(number) {
@@ -58,6 +75,7 @@ define([
                    console.log("error");
                }
            });
+          this.collection.live({pusherChannel: pusher_subscriber, eventType: "number"});
         }
     });
     return UpdateNumberView;
