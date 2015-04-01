@@ -17,7 +17,11 @@ define(['jquery', 'underscore', 'backbone', 'models/number/NumberModel', 'backbo
             console.log('number updated');
         },
         remove: function(data) {
-            console.log('number removed');
+
+            $numbers_menu = $('.sidebar-menu > li').has('a[href="#"]:contains("Numbers")');
+            $numbers_notification = $numbers_menu.find('.notification');
+            $numbers_menu.find('.treeview-menu > li').has('a:contains('+data.number+')').remove();
+            $numbers_notification.text(parseInt($numbers_notification.text()) - 1).fadeOut().fadeIn();
         },
         fetch: function(options) {
             if(typeof options.buy != 'undefined')

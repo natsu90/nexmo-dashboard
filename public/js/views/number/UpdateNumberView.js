@@ -25,7 +25,7 @@ define([
 
             number.destroy(null, {
               success: function () {
-                window.location.hash = '/inbound';
+                window.location.hash = '/buy';
               },
               error: function() {
                 $btn.button('reset').fadeOut().fadeIn();
