@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection','text!templates/number/buyNumberTemplate.html'], function($, _, Backbone,NumberCollection, buyNumberTemplate) {
+define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection', 'models/number/NumberModel', 'text!templates/number/buyNumberTemplate.html'], function($, _, Backbone,NumberCollection, NumberModel, buyNumberTemplate) {
     var InboundView = Backbone.View.extend({
         el: $("#page"),
         searchNumber: function(e) {
