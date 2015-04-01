@@ -178,12 +178,11 @@ Route::api('v1', function() {
 });
 
 /* VoiceXML Sample */
-/*
+
 Route::get('voicexml.xml', function() {
 
-	$xml = <<<EOT
-
-	<?xml version="1.0" encoding="UTF-8"?>
+$xml = <<<EOT
+<?xml version="1.0" encoding="UTF-8"?>
 	<vxml version = "2.1">
   		<form>
     		<block>
@@ -197,4 +196,3 @@ EOT;
 
 	return Response::make($xml)->header('Content-Type', 'text/xml');
 });
-*/
