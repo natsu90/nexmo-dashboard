@@ -61,6 +61,10 @@ class HomeController extends BaseController {
 			// truncate number table
 			DB::table('number')->truncate();
 
+			// set nexmo credentials to env
+			Cache::forever('NEXMO_KEY', $nexmo_key);
+			Cache::forever('NEXMO_SECRET', $nexmo_secret);
+
 			// add numbers to db
 			$numbers = $nexmo->getInboundNumbers();
 			if($numbers['count'] > 0) {
@@ -81,10 +85,6 @@ class HomeController extends BaseController {
 
 			// set balance to cache
 			Cache::put('nexmo', $credit_balance, 10);
-
-			// set nexmo credentials to env
-			Cache::forever('NEXMO_KEY', $nexmo_key);
-			Cache::forever('NEXMO_SECRET', $nexmo_secret);
 
 			if(Auth::check())
 				return Redirect::to('/');
