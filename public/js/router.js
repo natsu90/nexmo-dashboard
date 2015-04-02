@@ -7,7 +7,8 @@ define([
   'views/message/SendMessageView',
   'views/number/UpdateNumberView',
   'views/number/BuyNumberView',
-], function($, _, Backbone, InboundView, OutboundView, SendMessageView, UpdateNumberView, BuyNumberView) {
+  'views/number/CallLogsView',
+], function($, _, Backbone, InboundView, OutboundView, SendMessageView, UpdateNumberView, BuyNumberView, CallLogsView) {
  
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -17,6 +18,7 @@ define([
       'send(/:number)': 'sendMessage',
       'buy(/:country)': 'buyNumber',
       'number/(:number)': 'updateNumber',
+      'calls': 'showCalls',
  
       // Default
       '*actions': 'showInbound'
@@ -55,6 +57,12 @@ define([
  
         var buyNumberView = new BuyNumberView();
         buyNumberView.render(country);
+    });
+
+    app_router.on('route:showCalls', function () {
+ 
+        var callLogsView = new CallLogsView();
+        callLogsView.render();
     });
 
     var pusher_channel = 'boom',
