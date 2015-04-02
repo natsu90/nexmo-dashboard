@@ -32,9 +32,10 @@ class Number extends Eloquent {
 
         $nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
 
-        static::creating(function($number) use($nexmo) {
+        static::created(function($number) use($nexmo) {
             // set mo and voice callback url
-			return $nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
+            Queue::getIron()->addSubscriber('setMoNVoiceCallbackUrl', array('url' => url('queue/receive')));
+            Queue::push('setMoNVoiceCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number));
         });
 
         static::updating(function($number) use($nexmo){
@@ -46,5 +47,16 @@ class Number extends Eloquent {
             
             return $nexmo->cancelNumber($number->country_code, $number->number);
         });
+    }
+}
+
+class setMoNVoiceCallbackUrl {
+
+    public function fire($job, $data)
+    {
+        $nexmo = new NexmoAccount($data['nexmo_key'], $data['nexmo_secret']);
+        $nexmo->updateNumber($data['country_code'], $data['number'], url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
+
+        $job->delete();
     }
 }
