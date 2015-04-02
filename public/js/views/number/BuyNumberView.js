@@ -5,6 +5,7 @@ define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection'
           window.location.hash = '/buy/'+$(e.target).val();
         },
         buyNumber: function(e) {
+          e.preventDefault();
           var $this = $(e.target), number = new NumberModel({
             number: $this.data('number'),
             country_code: $this.data('country-code'),

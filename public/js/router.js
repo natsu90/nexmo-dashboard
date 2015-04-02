@@ -62,7 +62,7 @@ define([
       window.pusher_subscriber = pusher.subscribe(pusher_channel);
 
     pusher_subscriber.bind('update_balance', function(balance) {
-      $('#credit-balance').text(balance.replace(/0+$/g, '').substr(0,10)).fadeOut().fadeIn();
+      $('#credit-balance').text(balance.toString().replace(/0+$/g, '').substr(0,10)).fadeOut().fadeIn();
     });
 
     String.prototype.ucfirst = function() {
