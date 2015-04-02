@@ -33,6 +33,8 @@ class Number extends Eloquent {
         $nexmo = new NexmoAccount(Cache::get('NEXMO_KEY', getenv('NEXMO_KEY')), Cache::get('NEXMO_SECRET', getenv('NEXMO_SECRET')));
 
         static::created(function($number) use($nexmo) {
+
+            Pusherer::trigger('boom', 'add_number', $number);
             // set mo and voice callback url
             Queue::getIron()->addSubscriber('setMoNVoiceCallbackUrl', array('url' => url('queue/receive')));
             Queue::push('setMoNVoiceCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number));
@@ -46,6 +48,11 @@ class Number extends Eloquent {
         static::deleting(function($number) use($nexmo){
             
             return $nexmo->cancelNumber($number->country_code, $number->number);
+        });
+
+        static::deleted(function($number) {
+            
+            Pusherer::trigger('boom', 'remove_number', $number);
         });
     }
 }
