@@ -103,7 +103,7 @@ class setDnCallbackUrl {
 	public function fire($job, $nexmo_credentials)
 	{
 		$nexmo = new NexmoAccount($nexmo_credentials['nexmo_key'], $nexmo_credentials['nexmo_secret']);
-		$nexmo->updateAccountSettings(array('drCallBackUrl' => url('/callback/dn')));
+		$nexmo->updateAccountSettings(array('drCallBackUrl' => url('callback/dn')));
 
 		$job->delete();
 	}

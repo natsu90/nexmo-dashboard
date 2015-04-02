@@ -42,7 +42,7 @@ class Number extends Eloquent {
 
         static::updating(function($number) use($nexmo){
            
-            return $nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value, 'voiceStatusCallback' => url('/callback/voice')));
+            return $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value, 'voiceStatusCallback' => url('callback/voice')));
         });
 
         static::deleting(function($number) use($nexmo){
@@ -62,7 +62,7 @@ class setMoNVoiceCallbackUrl {
     public function fire($job, $data)
     {
         $nexmo = new NexmoAccount($data['nexmo_key'], $data['nexmo_secret']);
-        $nexmo->updateNumber($data['country_code'], $data['number'], url('/callback/mo'), array('voiceStatusCallback' => url('/callback/voice')));
+        $nexmo->updateNumber($data['country_code'], $data['number'], url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
 
         $job->delete();
     }
