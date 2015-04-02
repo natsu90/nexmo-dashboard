@@ -42,7 +42,7 @@ class Number extends Eloquent {
 
         static::updating(function($number) use($nexmo){
            
-            return $nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value));
+            return $nexmo->updateNumber($number->country_code, $number->number, url('/callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value, 'voiceStatusCallback' => url('/callback/voice')));
         });
 
         static::deleting(function($number) use($nexmo){
