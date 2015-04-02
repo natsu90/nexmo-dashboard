@@ -15,7 +15,7 @@ define(['jquery', 'underscore', 'backbone', 'models/message/InboundModel', 'back
             }
             $inbound_notification.text(parseInt($inbound_notification.text())+1).fadeOut().fadeIn();
             if(Backbone.history.fragment == 'inbound' || Backbone.history.fragment == '')
-                $inbound_notification.text('0').fadeOut('slow');
+                $inbound_notification.remove();
 
         	if(typeof inbound_datatable !== 'undefined') {
         		var row_data = [data.id, data.from, data.to, data.text, data.created_at, '<a href="#/send/'+data.from+'"><i class="fa fa-pencil"></i> Reply</a>'];

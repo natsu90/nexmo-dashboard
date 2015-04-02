@@ -15,7 +15,7 @@ define(['jquery', 'underscore', 'backbone', 'models/message/OutboundModel', 'bac
             }
             $outbound_notification.text(parseInt($outbound_notification.text()) + 1).fadeOut().fadeIn();
             if(Backbone.history.fragment == 'outbound')
-                $outbound_notification.text('0').fadeOut('slow');
+                $outbound_notification.remove();
 
         	if(typeof outbound_datatable !== 'undefined') {
         		var row_data = [data.id, data.from, data.to, data.text, data.created_at, data.status];
