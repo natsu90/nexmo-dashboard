@@ -66,6 +66,7 @@ class NumberController extends \BaseController {
 		$number = Number::where('number', $id)->first();
 		$number->voice_callback_type = Input::get('voice_callback_type');
 		$number->voice_callback_value = Input::get('voice_callback_value');
+		$number->own_callback_url = Input::get('own_callback_url');
 
 		if($number->save())
 			return array();

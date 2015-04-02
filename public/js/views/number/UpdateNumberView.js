@@ -38,7 +38,8 @@ define([
 
             number.save({
               voice_callback_type: $voice_callback_type.filter(':checked').val(),
-              voice_callback_value: $voice_callback_value.val()
+              voice_callback_value: $voice_callback_value.val(),
+              own_callback_url: $('#own_callback_url').val()
             }, {
               patch: true, 
               success: function () {
