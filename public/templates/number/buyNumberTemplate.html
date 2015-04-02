@@ -229,7 +229,7 @@
                         <td><%= number.get('type') %></td>
                         <td><%= number.get('features').join(', ') %></td>
                         <td><i class="fa fa-eur"></i> <%= number.get('cost') %></td>
-                        <td class="text-center"><a class="btn btn-primary buy-number btn-sm" href="#" data-number="<%= number.get('msisdn') %>" data-type="<%= number.get('type') %>" data-features="<%= number.get('features').join(',') %>" data-country-code="<%= number.get('country') %>"> Buy</a></td>
+                        <td class="text-center"><a data-loading-text="Buying..." class="btn btn-primary buy-number btn-sm" href="#" data-number="<%= number.get('msisdn') %>" data-type="<%= number.get('type') %>" data-features="<%= number.get('features').join(',') %>" data-country-code="<%= number.get('country') %>"> Buy</a></td>
                       </tr>
                       <% }); %>
                       <% } %>

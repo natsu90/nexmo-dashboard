@@ -47,7 +47,7 @@
             <div class="col-xs-8">                         
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Continue</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat" data-loading-text="Configuring...">Continue</button>
             </div><!-- /.col -->
           </div>
         </form>

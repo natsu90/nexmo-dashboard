@@ -59,7 +59,7 @@ define([
 
     var pusher_channel = 'boom',
         pusher = new Pusher(pusher_key);
-      window.pusher_subscriber = pusher.subscribe(pusher_channel)
+      window.pusher_subscriber = pusher.subscribe(pusher_channel);
 
     pusher_subscriber.bind('update_balance', function(balance) {
       $('#credit-balance').text(balance.replace(/0+$/g, '').substr(0,10)).fadeOut().fadeIn();
