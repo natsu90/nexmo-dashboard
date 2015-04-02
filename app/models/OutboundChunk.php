@@ -1,4 +1,5 @@
 <?php
+use GuzzleHttp\Client;
 
 class OutboundChunk extends Eloquent {
 	
@@ -66,7 +67,35 @@ class OutboundChunk extends Eloquent {
     			$outbound = Outbound::find($outbound_id);
     			$outbound->status = strtolower($outbound_chunk->dn_status);
     			$outbound->save();
+
+    			Queue::getIron()->addSubscriber('dnCallback', array('url' => url('queue/receive')));
+            	Queue::push('dnCallback', $outbound_chunk->id);
     		}
         });
     }
+}
+
+class dnCallback {
+
+	public function fire($job, $outbound_chunk_id)
+	{
+		$client = new Client();
+        $outbound_chunk = OutboundChunk::find($outbound_chunk_id);
+        $number = Number::where('number', $outbound_chunk->outbound->from)->first();
+
+        if(filter_var($number->own_callback_url, FILTER_VALIDATE_URL) !== FALSE) {
+
+            try {
+
+                $client->post($number->own_callback_url, array(
+                    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+                    'body' => array_merge($outbound_chunk->toArray(), $outbound_chunk->outbound->toArray(), array('callback_type' => 'dn'))
+                ));
+            } catch(Exception $e) {
+
+            }
+        }
+
+        $job->delete();
+	}
 }
