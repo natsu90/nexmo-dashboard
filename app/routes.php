@@ -162,6 +162,21 @@ Route::match(array('GET', 'POST'), 'callback/{item?}', function($item = 'debug')
 			$outbound_chunk->dn_status = Input::get('status');
 			$outbound_chunk->dn_error_code = Input::get('err-code');
 			$outbound_chunk->save();
+			break;
+		case 'voice':
+			if (!Input::has('call-id'))
+				break;
+			$call = new CallLog;
+			$call->call_id = Input::get('call-id');
+			$call->to = Input::get('to');
+			$call->status = Input::get('status');
+			$call->price = Input::get('call-price');
+			$call->rate = Input::get('call-rate');
+			$call->duration = Input::get('call-duration');
+			$call->start_time = Input::get('call-start');
+			$call->end_time = Input::get('call-end');
+			$call->direction = Input::get('call-direction');
+			$call->save();
 	}
 
     return Response::make('OK');
@@ -173,6 +188,7 @@ Route::api('v1', function() {
 
     Route::resource('inbound', 'InboundController', array('only' => array('index', 'show')));
     Route::resource('outbound', 'OutboundController', array('only' => array('index', 'show', 'store')));
+    Route::get('number/calls', 'NumberController@getCalls');
     Route::get('number/search/{country_code}', 'NumberController@getSearch');
     Route::resource('number', 'NumberController', array('only' => array('index', 'show', 'store', 'update', 'destroy')));
 });

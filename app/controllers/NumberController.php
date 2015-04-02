@@ -94,4 +94,9 @@ class NumberController extends \BaseController {
 
 		return $nexmo->getAvailableInboundNumbers($country_code, array('size' => 100));
 	}
+
+	public function getCalls()
+	{
+		return array('numbers' => CallLog::all());
+	}
 }

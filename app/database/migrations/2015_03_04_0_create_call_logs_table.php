@@ -15,6 +15,7 @@ class CreateCallLogsTable extends Migration {
 		Schema::create('call_logs', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('call_id', 40);
 			$table->bigInteger('to')->unsigned();
 			$table->string('status', 30);
 			$table->float('price');

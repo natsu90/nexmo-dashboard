@@ -73,7 +73,7 @@
             <div class="pull-left info">
               <p>Credit Balance: </p>
               <i class="fa fa-eur fa-lg"></i> <span style="font-size:200%" id="credit-balance"><?php echo $credit_balance; ?></span> 
-              <a href="#">
+              <a href="javascript:alert('Unfortunately it is not possible.')">
               <span class="fa-stack fa-lg pull-right" title="Topup Credit" data-toggle="tooltip" data-placement="bottom">
                 <i class="fa fa-plus fa-stack-1x"></i>
                 <i class="fa fa-circle-o fa-stack-2x"></i>
@@ -109,7 +109,7 @@
               <a href="#">
                 <i class="fa fa-phone-square"></i>
                 <span>Numbers</span>
-                <span class="label label-primary pull-right"><?php echo count($numbers);?></span>
+                <span class="label label-primary pull-right notification"><?php echo count($numbers);?></span>
               </a>
               <ul class="treeview-menu">
                 <?php if(count($numbers)):?>

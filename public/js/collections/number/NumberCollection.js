@@ -26,6 +26,8 @@ define(['jquery', 'underscore', 'backbone', 'models/number/NumberModel', 'backbo
         fetch: function(options) {
             if(typeof options.buy != 'undefined')
                 options.url = this.url+'/search/'+options.buy;
+            else if(typeof options.calls != 'undefined')
+                options.url = this.url+'/calls';
 
             return Backbone.Collection.prototype.fetch.call(this, options);
         }
