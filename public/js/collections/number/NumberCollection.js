@@ -9,7 +9,7 @@ define(['jquery', 'underscore', 'backbone', 'models/number/NumberModel', 'backbo
             
             $numbers_menu = $('.sidebar-menu > li').has('a[href="#"]:contains("Numbers")');
             $numbers_notification = $numbers_menu.find('.notification');
-            $numbers_menu.find('.treeview-menu').append('<li><a href="#/number/"'+data.number+'><i class="fa fa-'+ (data.type.indexOf('mobile') >= 0 ? 'mobile' : 'phone') +'"></i> '+data.number+'</a></li>')
+            $numbers_menu.find('.treeview-menu').append('<li><a href="#/number/'+data.number+'"><i class="fa fa-'+ (data.type.indexOf('mobile') >= 0 ? 'mobile' : 'phone') +'"></i> '+data.number+'</a></li>')
                 .find('a:contains('+data.number+')').addClass('active');
             $numbers_notification.text(parseInt($numbers_notification.text()) + 1).fadeOut().fadeIn();
         },
