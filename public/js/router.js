@@ -57,10 +57,9 @@ define([
         buyNumberView.render(country);
     });
 
-    var pusher_key = 'e1679c9044c67acd354b',
-        pusher_channel = 'boom',
+    var pusher_channel = 'boom',
         pusher = new Pusher(pusher_key);
-    window.pusher_subscriber = pusher.subscribe(pusher_channel);
+      window.pusher_subscriber = pusher.subscribe(pusher_channel)
 
     pusher_subscriber.bind('update_balance', function(balance) {
       $('#credit-balance').text(balance.replace(/0+$/g, '').substr(0,10)).fadeOut().fadeIn();

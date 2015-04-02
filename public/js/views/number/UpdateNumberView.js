@@ -13,8 +13,6 @@ define([
           e.preventDefault();
 
           var $voice_callback_type = $('[name=voice_callback_type]'), $voice_callback_value = $('#voice_callback_value');
-          if(typeof $voice_callback_type.filter('checked') == 'undefined' || $voice_callback_value.val().trim() == '')
-            return;
 
           var $btn = $('[type=submit]:focus').button('loading'),
               number = new NumberModel({
@@ -23,7 +21,8 @@ define([
 
           if($btn.data('action') == 'delete') {
 
-            number.destroy(null, {
+            number.destroy({
+              dataType: "text", 
               success: function () {
                 window.location.hash = '/buy';
               },
@@ -34,6 +33,9 @@ define([
             });
 
           } else if($btn.data('action') == 'update') {
+
+            if(typeof $voice_callback_type.filter('checked') == 'undefined' || $voice_callback_value.val().trim() == '')
+              return;
 
             number.save({
               voice_callback_type: $voice_callback_type.filter(':checked').val(),
@@ -68,7 +70,7 @@ define([
 
                    var voice_callback_type = currentNumber.get('voice_callback_type');
                    if(voice_callback_type != null || voice_callback_type != '')
-                    $('[name=voice_callback_type][value='+currentNumber.get('voice_callback_type')+']').click();
+                    $('[name=voice_callback_type][value='+voice_callback_type+']').click();
 
                   $('.sidebar-menu li').removeClass('active').has('a[href="#/number/'+number+'"]').addClass('active');
 

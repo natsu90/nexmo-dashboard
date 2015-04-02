@@ -36,7 +36,7 @@ class NumberController extends \BaseController {
         	$number->features = explode(',', Input::get('features'));
         	$number->save();
 
-        	return $number;
+        	return $this->response->noContent();
         }
 
         return $this->response->errorInternal();

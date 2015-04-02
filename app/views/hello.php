@@ -23,6 +23,9 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-simple.css" rel="stylesheet" type="text/css" />
 
     <script data-main="js/main" src="js/libs/requirejs/require.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var pusher_key = "<?php echo Config::get('pusherer::key');?>";
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
