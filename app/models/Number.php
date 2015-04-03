@@ -36,8 +36,8 @@ class Number extends Eloquent {
 
             Pusherer::trigger('boom', 'add_number', $number);
             // set mo and voice callback url
-            Queue::getIron()->addSubscriber('setMoNVoiceCallbackUrl', array('url' => url('queue/receive')));
-            Queue::push('setMoNVoiceCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number));
+            Queue::getIron()->addSubscriber('setupNumberCallbackUrl', array('url' => url('queue/receive')));
+            Queue::push('setupNumberCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number));
         });
 
         static::updating(function($number) use($nexmo){
@@ -57,7 +57,7 @@ class Number extends Eloquent {
     }
 }
 
-class setMoNVoiceCallbackUrl {
+class setupNumberCallbackUrl {
 
     public function fire($job, $data)
     {
