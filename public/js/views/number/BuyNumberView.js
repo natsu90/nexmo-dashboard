@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection', 'models/number/NumberModel', 'text!templates/number/buyNumberTemplate.html'], function($, _, Backbone,NumberCollection, NumberModel, buyNumberTemplate) {
-    var InboundView = Backbone.View.extend({
+    var BuyNumberView = Backbone.View.extend({
         el: $("#page"),
         searchNumber: function(e) {
           window.location.hash = '/buy/'+$(e.target).val();
@@ -58,5 +58,5 @@ define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection'
           this.collection.live({pusherChannel: pusher_subscriber, eventType: "number"});
         },
     });
-    return InboundView;
+    return BuyNumberView;
 });
