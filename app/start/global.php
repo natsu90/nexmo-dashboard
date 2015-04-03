@@ -1,6 +1,4 @@
 <?php
-use Natsu90\Nexmo\NexmoAccount;
-use GuzzleHttp\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,50 +82,3 @@ require app_path().'/filters.php';
 
 if (is_file(base_path(). '/.env'))
     Dotenv::load(base_path());
-
-class setupDnCallbackUrl {
-
-	public function fire($job, $nexmo_credentials)
-	{
-		$nexmo = new NexmoAccount($nexmo_credentials['nexmo_key'], $nexmo_credentials['nexmo_secret']);
-		$nexmo->updateAccountSettings(array('drCallBackUrl' => url('callback/dn')));
-
-		$job->delete();
-	}
-}
-
-class setupNumberCallbackUrl {
-
-    public function fire($job, $data)
-    {
-        $nexmo = new NexmoAccount($data['nexmo_key'], $data['nexmo_secret']);
-        $nexmo->updateNumber($data['country_code'], $data['number'], url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
-
-        $job->delete();
-    }
-}
-
-class moCallback {
-
-    public function fire($job, $inbound_id)
-    {
-        $client = new Client();
-        $inbound = Inbound::find($inbound_id);
-        $number = Number::where('number', $inbound->to)->first();
-
-        if(filter_var($number->own_callback_url, FILTER_VALIDATE_URL) !== FALSE) {
-
-            try {
-
-                $client->post($number->own_callback_url, array(
-                    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
-                    'body' => array_merge($inbound->toArray(), array('callback_type' => 'mo'))
-                ));
-            } catch(Exception $e) {
-
-            }
-        }
-
-        $job->delete();
-    }
-}

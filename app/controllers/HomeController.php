@@ -82,8 +82,8 @@ class HomeController extends BaseController {
 			}
 			// set dn callback url
         	// $nexmo->updateAccountSettings(array('drCallBackUrl' => url('callback/dn')));
-        	Queue::push('setupDnCallbackUrl', array('nexmo_key' => $nexmo_key, 'nexmo_secret' => $nexmo_secret));
-			Queue::getIron()->addSubscriber('setupDnCallbackUrl', array('url' => url('queue/receive')));
+			Queue::getIron()->addSubscriber('HomeController@setupDnCallbackUrl', array('url' => url('queue/receive')));
+        	Queue::push('HomeController@setupDnCallbackUrl', array('nexmo_key' => $nexmo_key, 'nexmo_secret' => $nexmo_secret));
 
 			// set balance to cache
 			Cache::put('nexmo', $credit_balance, 10);
@@ -95,6 +95,14 @@ class HomeController extends BaseController {
 		} catch(Exception $e) {
 			return Redirect::to('start')->with('message', $e->__toString());
 		}
+	}
+
+	public function setupDnCallbackUrl($job, $data)
+	{
+		$nexmo = new NexmoAccount($data['nexmo_key'], $data['nexmo_secret']);
+		$nexmo->updateAccountSettings(array('drCallBackUrl' => url('callback/dn')));
+
+		$job->delete();
 	}
 
 }
