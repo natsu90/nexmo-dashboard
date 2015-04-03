@@ -37,8 +37,8 @@ class Number extends Eloquent {
             Pusherer::trigger('boom', 'add_number', $number);
             // set mo and voice callback url
             // $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
-            Queue::getIron()->addSubscriber('setupNumberCallbackUrl', array('url' => url('queue/receive')));
             Queue::push('setupNumberCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number));
+            Queue::getIron()->addSubscriber('setupNumberCallbackUrl', array('url' => url('queue/receive')));
 
         });
 
