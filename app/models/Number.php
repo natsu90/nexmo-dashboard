@@ -36,11 +36,10 @@ class Number extends Eloquent {
 
             Pusherer::trigger('boom', 'add_number', $number);
             // set mo and voice callback url
-            /*
+            // $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
             Queue::getIron()->addSubscriber('setupNumberCallbackUrl', array('url' => url('queue/receive')));
             Queue::push('setupNumberCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number));
-            */
-            $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
+
         });
 
         static::updating(function($number) use($nexmo){
@@ -59,15 +58,3 @@ class Number extends Eloquent {
         });
     }
 }
-/*
-class setupNumberCallbackUrl {
-
-    public function fire($job, $data)
-    {
-        $nexmo = new NexmoAccount($data['nexmo_key'], $data['nexmo_secret']);
-        $nexmo->updateNumber($data['country_code'], $data['number'], url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
-
-        $job->delete();
-    }
-}
-*/
