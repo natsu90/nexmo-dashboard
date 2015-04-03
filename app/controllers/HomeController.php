@@ -81,8 +81,11 @@ class HomeController extends BaseController {
 				}
 			}
 			// set dn callback url
+			/*
 			Queue::getIron()->addSubscriber('setDnCallbackUrl', array('url' => url('queue/receive')));
         	Queue::push('setDnCallbackUrl', array('nexmo_key' => $nexmo_key, 'nexmo_secret' => $nexmo_secret));
+        	*/
+        	$nexmo->updateAccountSettings(array('drCallBackUrl' => url('callback/dn')));
 
 			// set balance to cache
 			Cache::put('nexmo', $credit_balance, 10);
