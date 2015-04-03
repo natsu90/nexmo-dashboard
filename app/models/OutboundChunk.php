@@ -69,15 +69,12 @@ class OutboundChunk extends Eloquent {
     			$outbound->save();
 
     			Queue::getIron()->addSubscriber('dnCallback', array('url' => url('queue/receive')));
-            	Queue::push('dnCallback', $outbound_chunk->id);
+            	Queue::push('OutboundChunk@dnCallback', $outbound_chunk->id, 'dnCallback');
     		}
         });
     }
-}
 
-class dnCallback {
-
-	public function fire($job, $outbound_chunk_id)
+	public function dnCallback($job, $outbound_chunk_id)
 	{
 		$client = new Client();
         $outbound_chunk = OutboundChunk::find($outbound_chunk_id);

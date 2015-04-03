@@ -15,8 +15,8 @@ class Inbound extends Eloquent {
 
             Pusherer::trigger('boom', 'add_inbound', $inbound);
 
-            Queue::getIron()->addSubscriber('Inbound@moCallback', array('url' => url('queue/receive')));
-            Queue::push('Inbound@moCallback', $inbound->id);
+            Queue::getIron()->addSubscriber('moCallback', array('url' => url('queue/receive')));
+            Queue::push('Inbound@moCallback', $inbound->id, 'moCallback');
         });
     }
 
