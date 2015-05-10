@@ -26,6 +26,16 @@ class Outbound extends Eloquent {
 		return $this->hasMany('OutboundChunk');
 	}
 
+    public function scopeQueued($query)
+    {
+        return $query->where('status', 'queued');
+    }
+
+    public function scopeWhatsapp($query, $number)
+    {
+        return $query->where('type', 'whatsapp')->where('from', $number);
+    }
+
 	public static function boot()
     {
         parent::boot();
@@ -33,8 +43,12 @@ class Outbound extends Eloquent {
         static::created(function($outbound) {
 
             $outbound = Outbound::find($outbound->id);
-            Queue::getIron()->addSubscriber('sendMessage', array('url' => url('queue/receive')));
-        	Queue::push('sendMessage', $outbound->id);
+            if($outbound->type != 'whatsapp') {
+
+                Queue::getIron()->addSubscriber('sendMessage', array('url' => url('queue/receive')));
+                Queue::push('sendMessage', $outbound->id);
+            }
+
             Pusherer::trigger('boom', 'add_outbound', $outbound);
         });
 

@@ -10,3 +10,7 @@
 | the console gets access to each of the command object instances.
 |
 */
+
+Artisan::add(new WhatsAppRegister);
+Artisan::add(new WhatsAppStart);
+Artisan::add(new WhatsAppStop);

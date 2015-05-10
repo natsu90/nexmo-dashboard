@@ -68,7 +68,7 @@ Route::filter('loginFilter', function() {
 		return Redirect::to('register');
 });
 
-Route::get('/login', array('before' => array('loginFilter', 'nexmo'), function() {
+Route::get('/login', array('before' => array('loginFilter', 'nexmo'), 'as' => 'login', function() {
 
 	return View::make('login');
 }));
@@ -187,6 +187,7 @@ Route::match(array('GET', 'POST'), 'callback/{item?}', function($item = 'debug')
 Route::api('v1', function() {
 
     Route::resource('inbound', 'InboundController', array('only' => array('index', 'show')));
+    Route::post('outbound/whatsapp', 'OutboundController@postReplyWhatsapp');
     Route::resource('outbound', 'OutboundController', array('only' => array('index', 'show', 'store')));
     Route::get('number/calls', 'NumberController@getCalls');
     Route::get('number/search/{country_code}', 'NumberController@getSearch');

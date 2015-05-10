@@ -5,6 +5,8 @@ class Number extends Eloquent {
 	
 	protected $table = 'number';
 
+    // protected $appends = ['contacts'];
+
 	protected $fillable = array(
 
 		'number',
@@ -13,7 +15,12 @@ class Number extends Eloquent {
 		'features',
 		'voice_callback_type',
 		'voice_callback_value',
-        'own_callback_url'
+        // whatsapp
+        'wa_password',
+        'wa_identity',
+        'wa_expiration',
+        // settings
+        'own_callback_url',
 	);
 
 	public function getFeaturesAttribute()
@@ -26,6 +33,16 @@ class Number extends Eloquent {
         $this->attributes['features'] = serialize($value);
     }
 
+    public function setWaExpirationAttribute($value)
+    {
+        $this->attributes['wa_expiration'] = DateTime::createFromFormat('U', $value)->format('Y-m-d H:i:s');
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany('WhatsAppContact');
+    }
+
 	public static function boot()
     {
         parent::boot();
@@ -36,7 +53,6 @@ class Number extends Eloquent {
 
             Pusherer::trigger('boom', 'add_number', $number);
             // set mo and voice callback url
-            // $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
             Queue::getIron()->addSubscriber('setupNumberCallbackUrl', array('url' => url('queue/receive')));
             Queue::push('Number@setupNumberCallbackUrl', array('nexmo_key' => $nexmo->nexmo_key, 'nexmo_secret' => $nexmo->nexmo_secret, 'country_code' => $number->country_code, 'number' => $number->number), 'setupNumberCallbackUrl');
 
@@ -44,7 +60,10 @@ class Number extends Eloquent {
 
         static::updating(function($number) use($nexmo){
            
-            return $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value, 'voiceStatusCallback' => url('callback/voice')));
+            if($number->isDirty('voice_callback_type') || $number->isDirty('voice_callback_value'))
+                return $nexmo->updateNumber($number->country_code, $number->number, url('callback/mo'), array('voiceCallbackType' => $number->voice_callback_type, 'voiceCallbackValue' => $number->voice_callback_value, 'voiceStatusCallback' => url('callback/voice')));
+            
+            return true;
         });
 
         static::deleting(function($number) use($nexmo){

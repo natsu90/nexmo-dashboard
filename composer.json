@@ -8,7 +8,8 @@
 		"natsu90/nexmo-php": "dev-master",
 		"dingo/api": "0.8.*",
 		"artdarek/pusherer": "1.0.*",
-		"iron-io/iron_mq": "~1"
+		"iron-io/iron_mq": "~1",
+		"mgp25/whatsapi": "dev-master"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "*",

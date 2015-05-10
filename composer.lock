@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bf04fa640d19a9a0b7ce28585e723cc4",
+    "hash": "1930ae7cffc5cc921460870e114166d1",
     "packages": [
         {
             "name": "artdarek/pusherer",
@@ -107,25 +107,23 @@
         },
         {
             "name": "d11wtq/boris",
-            "version": "v1.0.8",
+            "version": "v1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/borisrepl/boris.git",
-                "reference": "125dd4e5752639af7678a22ea597115646d89c6e"
+                "reference": "31055b15e2d3fe47f31f6aa8e277f8f3fc7eb483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/borisrepl/boris/zipball/125dd4e5752639af7678a22ea597115646d89c6e",
-                "reference": "125dd4e5752639af7678a22ea597115646d89c6e",
+                "url": "https://api.github.com/repos/borisrepl/boris/zipball/31055b15e2d3fe47f31f6aa8e277f8f3fc7eb483",
+                "reference": "31055b15e2d3fe47f31f6aa8e277f8f3fc7eb483",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
-            },
-            "suggest": {
                 "ext-pcntl": "*",
                 "ext-posix": "*",
-                "ext-readline": "*"
+                "ext-readline": "*",
+                "php": ">=5.3.0"
             },
             "bin": [
                 "bin/boris"
@@ -137,7 +135,11 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2014-01-17 12:21:18"
+            "license": [
+                "MIT"
+            ],
+            "description": "A tiny, but robust REPL (Read-Evaluate-Print-Loop) for PHP.",
+            "time": "2015-03-01 08:05:19"
         },
         {
             "name": "dingo/api",
@@ -208,16 +210,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "dcce91553e2e056857f1ea844949e9a8a71b613d"
+                "reference": "c982fe62c44798c433229cb0425c61b487cc1883"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/dcce91553e2e056857f1ea844949e9a8a71b613d",
-                "reference": "dcce91553e2e056857f1ea844949e9a8a71b613d",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/c982fe62c44798c433229cb0425c61b487cc1883",
+                "reference": "c982fe62c44798c433229cb0425c61b487cc1883",
                 "shasum": ""
             },
             "require": {
@@ -262,7 +264,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2015-02-17 15:50:31"
+            "time": "2015-03-30 15:26:59"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -467,16 +469,16 @@
         },
         {
             "name": "iron-io/iron_core",
-            "version": "0.2.2",
+            "version": "0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iron-io/iron_core_php.git",
-                "reference": "d5afdccb6aea2ce7c71cf9eedabc81dc3771af19"
+                "reference": "bcc721271d589cd787f569b1b69e2a3bcd2b1e22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iron-io/iron_core_php/zipball/d5afdccb6aea2ce7c71cf9eedabc81dc3771af19",
-                "reference": "d5afdccb6aea2ce7c71cf9eedabc81dc3771af19",
+                "url": "https://api.github.com/repos/iron-io/iron_core_php/zipball/bcc721271d589cd787f569b1b69e2a3bcd2b1e22",
+                "reference": "bcc721271d589cd787f569b1b69e2a3bcd2b1e22",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +514,7 @@
                 "iron",
                 "iron_core"
             ],
-            "time": "2014-11-11 11:18:17"
+            "time": "2015-04-23 14:37:42"
         },
         {
             "name": "iron-io/iron_mq",
@@ -786,6 +788,54 @@
             "time": "2014-12-10 16:59:07"
         },
         {
+            "name": "mgp25/whatsapi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mgp25/Chat-API.git",
+                "reference": "3942143a1e604ab1e1b711df875ecbf973eb7fda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mgp25/Chat-API/zipball/3942143a1e604ab1e1b711df875ecbf973eb7fda",
+                "reference": "3942143a1e604ab1e1b711df875ecbf973eb7fda",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-gd": "*",
+                "ext-openssl": "*",
+                "ext-pdo": "*",
+                "ext-sockets": "*",
+                "ext-sqlite3": "*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/",
+                    "src/events"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chat API Contributing Team",
+                    "homepage": "https://github.com/mgp25/Chat-API/graphs/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "The php WhatsApp library ",
+            "keywords": [
+                "whatsapi",
+                "whatsapp"
+            ],
+            "time": "2015-05-07 10:21:52"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.13.1",
             "source": {
@@ -993,16 +1043,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tchwork/utf8.git",
-                "reference": "01f0ed1628db7794e2d4e336f55a09daef4248a5"
+                "reference": "7287a6fb2c46a66ac6bfbaf0e4975229b27efcba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tchwork/utf8/zipball/01f0ed1628db7794e2d4e336f55a09daef4248a5",
-                "reference": "01f0ed1628db7794e2d4e336f55a09daef4248a5",
+                "url": "https://api.github.com/repos/tchwork/utf8/zipball/7287a6fb2c46a66ac6bfbaf0e4975229b27efcba",
+                "reference": "7287a6fb2c46a66ac6bfbaf0e4975229b27efcba",
                 "shasum": ""
             },
             "require": {
@@ -1046,7 +1096,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2015-01-29 08:36:50"
+            "time": "2015-04-26 09:51:43"
         },
         {
             "name": "phpseclib/phpseclib",
@@ -2315,7 +2365,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "natsu90/nexmo-php": 20
+        "natsu90/nexmo-php": 20,
+        "mgp25/whatsapi": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
