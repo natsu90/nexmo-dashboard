@@ -1,12 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# bin/release <build-dir>
 
-cat << EOF
----
-addons:
-default_process_types:
-if [ "$WHATSAPP_NUMBER" == false ]; then
-  web: vendor/bin/heroku-php-apache2 public
-else
-  worker: php artisan whatsapp:start
-fi
-EOF
+echo "Vergo"
+exit 0
