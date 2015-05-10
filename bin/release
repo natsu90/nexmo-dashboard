@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat << EOF
+---
+addons:
+default_process_types:
+if [ "$WHATSAPP_NUMBER" == false ]; then
+  web: vendor/bin/heroku-php-apache2 public
+else
+  worker: php artisan whatsapp:start
+fi
+EOF
