@@ -80,8 +80,11 @@ class Number extends Eloquent {
     public function setupNumberCallbackUrl($job, $data)
     {
         $nexmo = new NexmoAccount($data['nexmo_key'], $data['nexmo_secret']);
-        $nexmo->updateNumber($data['country_code'], $data['number'], url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
+        $updated = $nexmo->updateNumber($data['country_code'], $data['number'], url('callback/mo'), array('voiceStatusCallback' => url('callback/voice')));
 
-        $job->delete();
+        if($updated)
+            return $job->delete();
+
+        $job->release();
     }
 }
