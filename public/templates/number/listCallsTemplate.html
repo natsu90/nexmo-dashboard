@@ -1,0 +1,74 @@
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Call
+            <small>Logs</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-exchange"></i> Home</a></li>
+            <li><a href="#">Numbers</a></li>
+            <li class="active">Call Logs</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Call Logs</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="call-logs" class="table table-bordered table-striped">
+                    
+                    <thead>
+                      <tr>
+                        <th>Call ID</th>
+                        <th>To</th>
+                        <th>Status</th>
+                        <th>Total Price</th>
+                        <th>Rate/min</th>
+                        <th>Duration</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Direction</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(logs.length > 0) { %>
+                      <% _.each(logs, function(log) { %>
+                      <tr>
+                        <td><%= log.get('call_id') %></td>
+                        <td><%= log.get('to') %></td>
+                        <td><%= log.get('status') %></td>
+                        <td><i class="fa fa-eur"></i> <%= log.get('price') %></td>
+                        <td><i class="fa fa-eur"></i> <%= log.get('rate') %>/min</td>
+                        <td><%= log.get('duration') %></td>
+                        <td><%= log.get('start_time') %></td>
+                        <td><%= log.get('end_time') %></td>
+                        <td><%= log.get('direction') %></td>
+                      </tr>
+                      <% }); %>
+                      <% } %>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Call ID</th>
+                        <th>To</th>
+                        <th>Status</th>
+                        <th>Total Price</th>
+                        <th>Rate/min</th>
+                        <th>Duration</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Direction</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->

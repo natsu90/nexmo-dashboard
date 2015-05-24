@@ -1,0 +1,60 @@
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            New
+            <small>Message</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-pencil"></i> Home</a></li>
+            <li><a href="#">Messages</a></li>
+            <li class="active">New Message</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- right column -->
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">New Message</h3>
+                </div><!-- /.box-header -->
+
+              <form role="form">
+                <div class="box-body">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>From</label>
+                      <select id="from" style="width:100%">
+                        <% if(numbers.length > 0) { %>
+                        <% _.each(numbers, function(number) { %>
+                        <% if(number.get('features').indexOf('SMS') >= 0) { %>
+                        <option value="<%= number.get('number') %>"><%= number.get('number') %></option>
+                        <% } %>
+                        <% }); %>
+                        <% } %>
+                      </select>
+                    </div>
+
+                    <!-- textarea -->
+                    <div class="form-group">
+                      <label>To</label>
+                      <textarea id="to" class="form-control" rows="3" placeholder="Enter numbers with country number prefix (separated by comma, semicolon, slash, or new line) ..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Message</label>
+                      <textarea id="message" class="form-control" rows="3" placeholder="Enter your message ..."></textarea>
+                    </div>
+
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <button id="send-btn" type="submit" class="btn btn-primary" data-loading-text="Sending...">Send</button>
+                </div>
+              </form>
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->

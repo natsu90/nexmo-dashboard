@@ -1,0 +1,13 @@
+{
+    "name": "Nexmo Dashboard",
+    "dependencies": {
+        "bootstrap": "~3",
+        "requirejs": "*",
+        "backbone": "*",
+        "slimScroll": "~1",
+        "text": "*",
+        "datatables": "~1",
+        "underscore": "~1.5",
+        "select2": "~3"
+    }
+}

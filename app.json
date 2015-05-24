@@ -1,0 +1,11 @@
+{
+	"addons": [
+		"cleardb",
+		"pusher",
+		"iron_mq",
+		"papertrail"
+	],
+	"env": {
+    	"BUILDPACK_URL": "https://github.com/ddollar/heroku-buildpack-multi.git"
+    }
+}
