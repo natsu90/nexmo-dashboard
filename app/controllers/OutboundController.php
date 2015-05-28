@@ -56,7 +56,7 @@ class OutboundController extends \BaseController {
 		return Outbound::orderBy('created_at', 'desc')->get();
 	}
 
-	public function postReplyWhatsapp()
+	public function postReply()
 	{
 		$inbound = Inbound::findOrFail(Input::get('inbound_id'));
 
@@ -68,7 +68,7 @@ class OutboundController extends \BaseController {
 		$outbound->from = $inbound->to;
 		$outbound->to = $inbound->from;
 		$outbound->text = Input::get('text');
-		$outbound->type = 'whatsapp';
+		$outbound->type = $inbound->type;
 		$outbound->save();
 	}
 }

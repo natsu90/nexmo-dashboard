@@ -187,7 +187,7 @@ Route::match(array('GET', 'POST'), 'callback/{item?}', function($item = 'debug')
 Route::api('v1', function() {
 
     Route::resource('inbound', 'InboundController', array('only' => array('index', 'show')));
-    Route::post('outbound/whatsapp', 'OutboundController@postReplyWhatsapp');
+    Route::post('outbound/reply', 'OutboundController@postReply');
     Route::resource('outbound', 'OutboundController', array('only' => array('index', 'show', 'store')));
     Route::get('number/calls', 'NumberController@getCalls');
     Route::get('number/search/{country_code}', 'NumberController@getSearch');
