@@ -15,6 +15,9 @@ define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection'
           $this.button('loading');
 
           number.save(null, {
+            beforeSend: function(xhr){
+              xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+            },
             success: function() {
               window.location.hash = '/number/'+$this.data('number');
             },
@@ -29,6 +32,9 @@ define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection'
             country = 'MY';
         	this.collection = new NumberCollection();
         	this.collection.fetch({
+                beforeSend: function(xhr){
+                  xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+                },
                 buy: country,
                success: function(collection, response) {
                    var template = _.template(buyNumberTemplate, {

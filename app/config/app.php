@@ -122,7 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Dingo\Api\Provider\ApiServiceProvider',
-		'Artdarek\Pusherer\PushererServiceProvider'
+		'Artdarek\Pusherer\PushererServiceProvider',
+		'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
 	),
 
 	/*
@@ -189,7 +190,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'API' 			  => 'Dingo\Api\Facade\API'
+		'API' 			  => 'Dingo\Api\Facade\API',
+		'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
 	),
 
 );

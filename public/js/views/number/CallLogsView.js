@@ -5,6 +5,9 @@ define(['jquery', 'underscore', 'backbone','collections/number/NumberCollection'
         	var that = this;
         	this.collection = new NumberCollection();
         	this.collection.fetch({
+                beforeSend: function(xhr){
+                  xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+                },
                 calls: true,
                success: function(collection, response) {
                    var template = _.template(listCallsTemplate, {

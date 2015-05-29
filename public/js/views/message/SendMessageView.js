@@ -40,6 +40,9 @@ define([
            
           outbound = new OutboundModel(outbound_data);
           outbound.save(null, {
+            beforeSend: function(xhr){
+              xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+            },
             success: function() {
               window.location.hash = '/outbound';
             },
@@ -52,6 +55,9 @@ define([
         	var that = this;
         	this.collection = new NumberCollection();
         	this.collection.fetch({
+                beforeSend: function(xhr){
+                  xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+                },
                success: function(collection, response) {
                    var template = _.template(sendMessageTemplate, {
                        numbers: collection.models

@@ -5,6 +5,9 @@ define(['jquery', 'underscore', 'backbone','collections/message/OutboundCollecti
         	var that = this;
         	this.collection = new OutboundCollection();
         	this.collection.fetch({
+                beforeSend: function(xhr){
+                  xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+                },
                success: function(collection, response) {
                    var template = _.template(listOutboundTemplate, {
                        outbound: collection.models

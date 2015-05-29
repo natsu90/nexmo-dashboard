@@ -22,6 +22,9 @@ define([
           if($btn.data('action') == 'delete') {
 
             number.destroy({
+              beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+              },
               success: function () {
                 window.location.hash = '/buy';
               },
@@ -41,6 +44,9 @@ define([
               voice_callback_value: $voice_callback_value.val(),
               own_callback_url: $('#own_callback_url').val()
             }, {
+              beforeSend: function(xhr){
+                xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+              },
               patch: true, 
               success: function () {
                 $btn.button('reset');
@@ -56,6 +62,9 @@ define([
         	var that = this;
         	this.collection = new NumberCollection();
         	this.collection.fetch({
+                beforeSend: function(xhr){
+                  xhr.setRequestHeader('Authorization', 'Bearer '+auth_token);
+                },
                success: function(collection, response) {
                    var currentNumber = collection.filter(function(o) { 
                       return _.where(o, {number: parseInt(number)}).length > 0 || _.where(o, {number: number.toString()}).length > 0;

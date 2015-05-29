@@ -184,7 +184,7 @@ Route::match(array('GET', 'POST'), 'callback/{item?}', function($item = 'debug')
 
 /* API */
 
-Route::api('v1', function() {
+Route::api(['version' => 'v1', 'protected' => true], function() {
 
     Route::post('inbound/reply', 'InboundController@postReply');
     Route::resource('inbound', 'InboundController', array('only' => array('index', 'show')));
