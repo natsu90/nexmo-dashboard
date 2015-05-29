@@ -186,8 +186,8 @@ Route::match(array('GET', 'POST'), 'callback/{item?}', function($item = 'debug')
 
 Route::api('v1', function() {
 
+    Route::post('inbound/reply', 'InboundController@postReply');
     Route::resource('inbound', 'InboundController', array('only' => array('index', 'show')));
-    Route::post('outbound/reply', 'OutboundController@postReply');
     Route::resource('outbound', 'OutboundController', array('only' => array('index', 'show', 'store')));
     Route::get('number/calls', 'NumberController@getCalls');
     Route::get('number/search/{country_code}', 'NumberController@getSearch');

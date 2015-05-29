@@ -55,20 +55,4 @@ class OutboundController extends \BaseController {
 	{
 		return Outbound::orderBy('created_at', 'desc')->get();
 	}
-
-	public function postReply()
-	{
-		$inbound = Inbound::findOrFail(Input::get('inbound_id'));
-
-		$text = trim(Input::get('text'));
-		if($text == "")
-			return array('error' => 'Text is empty');
-		
-		$outbound = new Outbound;
-		$outbound->from = $inbound->to;
-		$outbound->to = $inbound->from;
-		$outbound->text = Input::get('text');
-		$outbound->type = $inbound->type;
-		$outbound->save();
-	}
 }
