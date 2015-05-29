@@ -28,6 +28,7 @@ class Inbound extends Eloquent {
 
         if(filter_var($number->own_callback_url, FILTER_VALIDATE_URL) !== FALSE) {
 
+            $success = true;
             try {
 
                 $client->post($number->own_callback_url, array(
@@ -35,8 +36,11 @@ class Inbound extends Eloquent {
                     'body' => array_merge($inbound->toArray(), array('callback_type' => 'mo'))
                 ));
             } catch(Exception $e) {
-
+                $success = false;
             }
+
+            if(!$success && $job->attempts() < 7)
+                $job->release(10);
         }
 
         $job->delete();
