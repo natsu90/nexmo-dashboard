@@ -9,7 +9,8 @@
 		"dingo/api": "0.8.*",
 		"artdarek/pusherer": "1.0.*",
 		"iron-io/iron_mq": "~1",
-		"mgp25/whatsapi": "dev-master"
+		"mgp25/whatsapi": "dev-master",
+		"tymon/jwt-auth": "0.4.*"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "*",

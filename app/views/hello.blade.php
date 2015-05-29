@@ -24,7 +24,8 @@
 
     <script data-main="js/main" src="js/libs/requirejs/require.js" type="text/javascript"></script>
     <script type="text/javascript">
-      var pusher_key = "<?php echo Config::get('pusherer::key');?>";
+      var pusher_key = "{{ Config::get('pusherer::key') }}",
+          auth_token = "{{ JWTAuth::fromUser(Auth::user()) }}";
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
